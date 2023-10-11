@@ -67,7 +67,7 @@ aside {
   transition: 0.3s ease-out;
 
   .flex {
-    flex: 1 1 0;
+    flex: 1;
   }
   .logo {
     margin-bottom: 1rem;
@@ -166,7 +166,7 @@ aside {
     }
 
     .menu-toggle-wrap {
-      top: -3rem;
+      top: -12rem;
       .menu-toggle {
         transform: rotate(-180deg);
       }

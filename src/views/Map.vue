@@ -1,6 +1,6 @@
 <template>
-  <Sidebar />
-  <main>
+  <div class="page-layout">
+    <Sidebar />
     <div class="map-wrap">
       <a href="https://www.maptiler.com" class="watermark"
         ><img
@@ -9,12 +9,12 @@
       /></a>
       <div class="map" ref="mapContainer"></div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
 import Sidebar from "../components/Sidebar.vue";
-import { Map } from "maplibre-gl";
+import { Map, NavigationControl, Marker } from "maplibre-gl";
 import { shallowRef, onMounted, onUnmounted, markRaw } from "vue";
 
 export default {
@@ -28,21 +28,31 @@ export default {
 
     onMounted(() => {
       const apiKey = "gUeAqEoOqZo5GMaFLlQx";
+      if (apiKey == null) {
+        throw new Error(
+          "You need to configure env VUE_APP_API_KEY first, see README"
+        );
+      }
 
-      const initialState = { lng: 139.753, lat: 35.6844, zoom: 14 };
+      const initialState = { lng: 28.9784, lat: 41.0082, zoom: 12 };
 
       map.value = markRaw(
         new Map({
           container: mapContainer.value,
-          style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
+          style: `https://api.maptiler.com/maps/streets/style.json?key=${apiKey}`,
           center: [initialState.lng, initialState.lat],
           zoom: initialState.zoom,
         })
       );
-    }),
-      onUnmounted(() => {
-        map.value?.remove();
-      });
+      map.value.addControl(new NavigationControl(), "top-right");
+      new Marker({ color: "#FF0000" })
+        .setLngLat([139.7525, 35.6841])
+        .addTo(map.value);
+    });
+
+    onUnmounted(() => {
+      map.value?.remove();
+    });
 
     return {
       map,
@@ -53,13 +63,21 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style >
+.page-layout {
+  display: flex;
+
+  @media (max-width: 1024px) {
+    padding-left: 6rem;
+  }
+}
 .map-wrap {
   position: relative;
   width: 100%;
-  height: calc(
+  height: 100vh;
+  /* height: calc(
     100vh - 77px
-  ); /* calculate height of the screen minus the heading */
+  );  */
 }
 
 .map {

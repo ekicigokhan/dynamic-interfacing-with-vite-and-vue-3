@@ -20,13 +20,30 @@
           <a href="#">Şifremi unuttum !</a>
           <a href="register">Kayıt Ol</a>
         </div>
-        <input type="submit" value="Giriş" to="/profile" />
+
+        <router-link class="button" to="/">GİRİŞ</router-link>
       </form>
     </div>
   </div>
 </template>
   
-  <script>
+<script>
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async handleSubmit() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      }; 
+    },
+  },
+};
 </script>
   
   <style scoped>
@@ -37,6 +54,33 @@
   min-height: 100vh;
   background: #23242a;
 }
+.box form .button {
+  color: black;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  padding: 9px 25px;
+  background: var(--light);
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 4px;
+  font-weight: 600;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.box form .button:active {
+  opacity: 0.8;
+}
+.box form .button:hover {
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    rgb(26, 167, 96) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
 .box {
   position: relative;
   width: 380px;
@@ -173,34 +217,12 @@
 .box form .links a:nth-child(2) {
   color: #fff;
 }
-.box form input[type="submit"] {
-  border: none;
-  outline: none;
-  padding: 9px 25px;
-  background: var(--light);
-  cursor: pointer;
-  font-size: 0.9em;
-  border-radius: 4px;
-  font-weight: 600;
-  width: 100px;
-  margin-top: 10px;
-}
-.box form input[type="submit"]:active {
-  opacity: 0.8;
-}
-.box form input[type="submit"]:hover {
-  color: #fff;
-  background: linear-gradient(
-    90deg,
-    rgb(26, 167, 96) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
-}
 .box form img {
   width: 100px;
   height: 100px;
   border-radius: 40%;
   margin: auto;
+  margin-bottom: 30px;
 }
 </style>
   

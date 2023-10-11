@@ -1,7 +1,5 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script setup>
@@ -37,16 +35,16 @@ button {
   background: none;
 }
 
-.app {
-  display: flex;
+// .app {
+//   display: flex;
 
-  main {
-    flex: 1 1 0;
-    padding: 2rem;
+//   main {
+//     flex: 1 1 0;
+//     padding: 2rem;
 
-    @media (max-width: 1024px) {
-      padding-left: 6rem;
-    }
-  }
-}
+//     @media (max-width: 1024px) {
+//       padding-left: 6rem;
+//     }
+//   }
+// }
 </style>
